@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 연습</title>
+</head>
+
+<body>
+    <h3>입력창</h3>
+    <hr>
+    <!--이건 밑줄!-->
+    <input type="text" id="input1"></input>   
+    <input type="text" id="input3" placeholder="연산기호">
+    <input type="text" id="input2"></input>
+    <button id="button1" onclick=clickFunc()>버튼</button>
+    <br> <!--br은 한줄띄기-->
+    <br> 
+    <input type="text" id="input4">
+    <button id="button2" onclick=calcGuguFunc()>구구단</button>
+
+    <script> //script 태그 부분은 화면을 그리는데 관여하지 않음
+        var sStr = '123',
+            iVar = 123,
+            sValue1,
+            sValue2,
+            sValue3,    //복사할때 끝에 세미콜론아닌 콤마 주의!
+            sValueGugu;        
+
+
+        var oInput1 = document.getElementById("input1");
+        var oInput2 = document.getElementById("input2");
+        var oInput3 = document.getElementById("input3");
+        var oInput4 = document.getElementById("input4");
+
+        var calcGuguFunc = function() {
+            //구구단 단수 입력창에 값이 입력 안되어있으면
+            //alert 로 입력값이 없다고 알려주는 로직을 추가
+            
+            //debugger;
+            
+            sValueGugu = oInput4.value;
+
+            if (sValueGugu) {
+                // es6 var -> let
+                //index 같은 경우는 for 문을 위한 조건 관리용 변수(local variable)로 둔다
+                // for (시작값; 조건; 스탭)
+                for (var index = 1; index <= 9; index++) {
+                var sGuguResult = sValueGugu * index;
+                var sText = sValueGugu + " * " + index + " = " + sGuguResult;
+
+                console.log(sText);
+                }           
+            } else{
+                alert("'단' 수를 입력하세요!"); 
+            }
+                
+            }
+            
+            
+            
+        
+
+        var clickFunc = function (){
+            sValue1 = oInput1.value;    // '' X undefined
+            sValue2 = oInput2.value;
+            sValue3 = oInput3.value;
+            var iResult;
+            
+            // 조건문에서 거짓으로 인식하는 대상
+            // null undefined '' 0
+            //AND &&
+            //OR ||
+            //값있는지 판별 만들어주기
+            if (sValue1 && sValue2 && sValue3) {
+                switch (sValue3) {
+                case '+':
+                    iResult = parseInt(sValue1) + parseInt(sValue2);                    
+                    break;  //break가 없으면 다음 case 조건을 검증시도함
+                case '-':
+                    iResult = parseInt(sValue1) - parseInt(sValue2);  
+                    break;
+                case '*':
+                    iResult = parseInt(sValue1) * parseInt(sValue2);  
+                    break;
+                case '/':
+                    if (sValue2 === '0') {
+                        iResult = "0으로 나눌 수 없습니다"
+                    } else{
+                        iResult = parseInt(sValue1) / parseInt(sValue2);  
+                    }                   
+                    break;
+                //default:    // when others 와 같은 역할
+                   // break;
+            }
+
+                alert(iResult);           
+            }   else{
+                alert("입력필드를 확인하세요!"); 
+                console.error('false');
+            }
+
+            
+        };
+
+
+    </script>
+</body>
+
+</html>
